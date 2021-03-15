@@ -55,11 +55,7 @@ def profile(request):
         form = UserProfileForm(instance=request.user)
     context = {
         'form' : form,
-        'baskets' : Basket.objects.all()
+        'baskets' : Basket.objects.filter(user=user),
     }
     return render(request, 'authapp/profile.html', context)
 
-def basket_delete(request, id=None):
-    basket = Basket.objects.get(id=id)
-    basket.delete()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
