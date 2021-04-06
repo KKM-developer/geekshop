@@ -3,3 +3,5 @@ __pycache__/
 db.sqlite3
 media
 django_2.0
+!/geekshop/.env
+!/geekshop/vk.json

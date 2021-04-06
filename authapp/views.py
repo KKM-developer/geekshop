@@ -10,6 +10,22 @@ from django.core.mail import send_mail
 from django.conf import settings
 from authapp.models import User
 
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.contrib import auth
+from django.contrib.auth.views import LogoutView
+
+from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm
+from authapp.forms import UserProfileEditForm
+
+from basketapp.models import Basket
+from .models import User
+from .models import UserProfile
+from django.db import transaction
+
+from django.views.generic import FormView, UpdateView
+
 
 def login(request):
     if request.method == 'POST':
@@ -106,3 +122,8 @@ def verify(request, email, activation_key):
     except Exception as e:
         print(f'error activation user : {e.args}')
         return HttpResponseRedirect(reverse('main'))
+
+    class Login(LoginView):
+        """
+        CBV контролер для страницы входа на сайт
+        """
