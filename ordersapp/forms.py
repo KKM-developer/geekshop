@@ -3,6 +3,7 @@ from .models import Order, OrderItem
 
 
 class OrderForm(forms.ModelForm):
+    price = forms.CharField(label='цена', required=False)
     class Meta:
         model = Order
         exclude = ('user', )
